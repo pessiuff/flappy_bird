@@ -19,8 +19,16 @@ namespace flappy_bird {
 
         Texture2D& getAtlasTexture();
         Rectangle getAtlasTextureRect(AtlasTextureRect rect);
+        Texture2D& getBackgroundTexture();
+        Sound& getFlapSound();
+        Sound& getPointSound();
+        Sound& getDeathSound();
 
     private:
         Texture2D m_atlasTexture {};
+        Texture2D m_backgroundTexture {};
+        Sound m_flapSound {};
+        Sound m_pointSound {};
+        Sound m_deathSound {};
     };
 }

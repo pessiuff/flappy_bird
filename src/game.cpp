@@ -15,7 +15,8 @@ Game& Game::getInstance() {
 
 void Game::run() {
     InitWindow(k_renderWidth, k_renderHeight, "Flappy Bird");
-    SetTargetFPS(60);
+    InitAudioDevice();
+    SetTargetFPS(k_renderFPS);
 
     m_assetManager.loadAll();
     

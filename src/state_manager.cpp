@@ -1,4 +1,7 @@
 #include "state_manager.hpp"
+
+#include "asset_manager.hpp"
+
 #include <stdio.h>
 
 using namespace flappy_bird;
@@ -25,6 +28,8 @@ void StateManager::update() {
 }
 
 void StateManager::draw() {
+    DrawTexture(AssetManager::getInstance().getBackgroundTexture(), 0,0, WHITE);
+    
     switch (m_state) {
         case State::MENU: {
             drawMenu();
@@ -56,11 +61,11 @@ void StateManager::drawMenu() {
     char highScoreText[] = {"High Score: %d"};
     sprintf(highScoreText, highScoreText, m_highScore);
     int highScoreTextWidth = MeasureText(highScoreText, 32.0f);
-    DrawText(highScoreText, 720 / 2.0f - highScoreTextWidth / 2.0f, 1280 / 2.0f - 18.0f - 96, 32.0f, BLACK);
+    DrawText(highScoreText, 720 / 2.0f - highScoreTextWidth / 2.0f, 1280 / 2.0f - 16 - 12, 32.0f, WHITE);
 
     const char* playText = "Click anywhere to start.";
     int playTextWidth = MeasureText(playText, 24.0f);
-    DrawText(playText, 720 / 2.0f - playTextWidth / 2.0f, 1280 / 2.0f - 12.0f - 64, 24.0f, BLACK);
+    DrawText(playText, 720 / 2.0f - playTextWidth / 2.0f, 1280 / 2.0f + 12, 24.0f, WHITE);
 }
 
 void StateManager::updateGameplay() {
@@ -70,7 +75,7 @@ void StateManager::updateGameplay() {
     Rectangle playerCollisionRect = m_player.getCollisionRect();
 
     // Kill player when in contact with ground.
-    if (playerCollisionRect.y + playerCollisionRect.height >= k_renderHeight) {
+    if (CheckCollisionPointRec({ playerCollisionRect.x, k_renderHeight - playerCollisionRect.height / 2.5f }, playerCollisionRect)) {
         m_player.kill();
     }
 
@@ -84,11 +89,13 @@ void StateManager::updateGameplay() {
         if (m_score > m_highScore) {
             m_highScore = m_score;
         }
+        PlaySound(AssetManager::getInstance().getDeathSound());
         return;
     }
 
     if (m_spawner.isCollidingWithPoint(playerCollisionRect)) {
         m_score += 1;
+        PlaySound(AssetManager::getInstance().getPointSound());
     }
 }
 
@@ -98,5 +105,5 @@ void StateManager::drawGameplay() {
 
     char scoreText[] = {"Score: %d"};
     sprintf(scoreText, scoreText, m_score);
-    DrawText(scoreText, 4, 4, 32.0f, BLACK);
+    DrawText(scoreText, 4, 4, 32.0f, WHITE);
 }

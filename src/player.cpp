@@ -13,6 +13,7 @@ void Player::update() {
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         m_fallSpeed = -384.0f;
+        PlaySound(AssetManager::getInstance().getFlapSound());
     }
 
     if (m_fallSpeed < 640.0f) {
