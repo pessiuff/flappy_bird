@@ -1,0 +1,14 @@
+*
+
+!.gitignore
+
+!assets/
+!assets/**
+
+!deps/
+!deps/**
+
+!src/
+!src/**
+
+!CMakeLists.txt
