@@ -30,6 +30,8 @@ void Game::run() {
 
     m_assetManager.unloadAll();
 
+    CloseAudioDevice();
+
     CloseWindow();
 }
 
