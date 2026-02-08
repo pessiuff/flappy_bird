@@ -1,6 +1,5 @@
 #include "game.hpp"
 
-#include "constants.hpp"
 #include "asset_manager.hpp"
 #include "state_manager.hpp"
 

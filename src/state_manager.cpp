@@ -58,14 +58,14 @@ void StateManager::drawMenu() {
     m_player.draw();
     m_spawner.draw();
 
-    char highScoreText[] = {"High Score: %d"};
-    sprintf(highScoreText, highScoreText, m_highScore);
+    char highScoreText[64];
+    snprintf(highScoreText, sizeof(highScoreText), "High Score: %d", m_highScore);
     int highScoreTextWidth = MeasureText(highScoreText, 32.0f);
-    DrawText(highScoreText, 720 / 2.0f - highScoreTextWidth / 2.0f, 1280 / 2.0f - 16 - 12, 32.0f, WHITE);
+    DrawText(highScoreText, k_renderWidth / 2.0f - highScoreTextWidth / 2.0f, k_renderHeight / 2.0f - 16 - 12, 32.0f, WHITE);
 
     const char* playText = "Click anywhere to start.";
     int playTextWidth = MeasureText(playText, 24.0f);
-    DrawText(playText, 720 / 2.0f - playTextWidth / 2.0f, 1280 / 2.0f + 12, 24.0f, WHITE);
+    DrawText(playText, k_renderWidth / 2.0f - playTextWidth / 2.0f, k_renderHeight / 2.0f + 12, 24.0f, WHITE);
 }
 
 void StateManager::updateGameplay() {
@@ -103,7 +103,7 @@ void StateManager::drawGameplay() {
     m_player.draw();
     m_spawner.draw();
 
-    char scoreText[] = {"Score: %d"};
-    sprintf(scoreText, scoreText, m_score);
+    char scoreText[64];
+    snprintf(scoreText, sizeof(scoreText), "Score: %d", m_score);
     DrawText(scoreText, 4, 4, 32.0f, WHITE);
 }

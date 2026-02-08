@@ -27,9 +27,9 @@ void Player::update() {
     bool is_falling = m_fallSpeed > 0.0f;
 
     if (is_falling) {
-        m_rotation += GetFrameTime() * 180.0f;
+        m_rotation += k_renderFrameTime * 180.0f;
     } else {
-        m_rotation -= GetFrameTime() * 720.0f;
+        m_rotation -= k_renderFrameTime * 720.0f;
     }
     m_rotation = Clamp(m_rotation, -45.0f, 90.0f);
 
@@ -42,7 +42,7 @@ void Player::draw() {
     Texture2D atlasTexture = assetManager.getAtlasTexture();
     
     static float animationTimer = 0.0f;
-    animationTimer += GetFrameTime();
+    animationTimer += k_renderFrameTime;
     if (animationTimer >= 1.0f) {
         animationTimer = 0.0f;
     }

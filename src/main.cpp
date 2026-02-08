@@ -1,7 +1,5 @@
 #include "game.hpp"
 
-#include <raylib.h>
-
 using namespace flappy_bird;
 
 int main() {

@@ -12,7 +12,7 @@ void PipeSpawner::update() {
     static std::mt19937 s_random_generator(s_random_device());
 
     static float spawnTimer = 0.0f;
-    spawnTimer += GetFrameTime();
+    spawnTimer += k_renderFrameTime;
     if (spawnTimer >= 2.0f) {
         for (int i = 0; i < 4; i++) {
             Pipe& pipe = m_pipes[i];
@@ -35,7 +35,7 @@ void PipeSpawner::update() {
             continue;
         }
 
-        pipe.xPosition -= GetFrameTime() * k_pipeSize * 2;
+        pipe.xPosition -= k_renderFrameTime * k_pipeSize * 2;
 
         if (pipe.xPosition <= -(k_pipeSize * 2)) {
             pipe.respawn = true;
